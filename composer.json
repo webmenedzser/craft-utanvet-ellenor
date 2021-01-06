@@ -2,7 +2,7 @@
     "name": "webmenedzser/craft-utanvet-ellenor",
     "description": "Utánvét Ellenőr integration for Craft CMS",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "keywords": [
         "craft",
         "cms",
