@@ -59,9 +59,6 @@ All inputs are hashed with SHA-256 by the module on your server. This means:
 
 ## Found a bug?
 
-Check the issues or [open a new one](https://github.com/rrd108/ps-utanvet-ellenor/issues)!
-
-Brought to you by [Rādhārādhya dāsa](https://webmania.cc/) & [dr. Ottó Radics](https://www.webmenedzser.hu)
-
+Check the issues or [open a new one](https://github.com/webmenedzser/craft-utanvet-ellenor/issues)!
     
 Brought to you by [dr. Ottó Radics](https://www.webmenedzser.hu)
