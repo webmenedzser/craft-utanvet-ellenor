@@ -1,0 +1,33 @@
+{
+  "name": "webmenedzser/craft-utanvet-ellenor",
+  "description": "Utánvét Ellenőr integration for Craft CMS",
+  "version": "0.8.0",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "craft utanvet ellenor"
+  ],
+  "author": [
+    {
+      "name": "dr. Otto Radics",
+      "email": "otto@webmenedzser.hu",
+      "url": "https://www.webmenedzser.hu"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webmenedzser/craft-utanvet-ellenor.git"
+  },
+  "scripts": {
+    "changelog": "auto-changelog -p",
+    "version": "npm run replace-version && npm run changelog && git add -A",
+    "postversion": "git push && git push --tags",
+    "replace-version": "replace-in-file --configFile ./.replace-in-file.config.js"
+  },
+  "devDependencies": {
+    "auto-changelog": "^1.16.4",
+    "replace-in-file": "^4.2.0"
+  }
+}

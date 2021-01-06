@@ -1,0 +1,117 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Utánvét Ellenőr plugin for Craft CMS 3.x
+ *
+ * Utánvét Ellenőr Settings.twig
+ *
+ * @author    dr. Ottó Radics
+ * @copyright Copyright (c) 2020 dr. Ottó Radics
+ * @link      https://www.webmenedzser.hu
+ * @package   CraftUtanvetEllenor
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("webmenedzser\\craftutanvetellenor\\assetbundles\\craftutanvetellenor\\CraftUtanvetEllenorAsset") %}
+
+{{ forms.lightswitchField({
+    label: 'Which backend to use?' | t('craft-utanvet-ellenor'),
+    instructions: 'Production or Sandbox mode.' | t('craft-utanvet-ellenor'),
+    id: 'production',
+    name: 'production',
+    on: settings['production'] ?: false,
+    onLabel: 'Live' | t('craft-utanvet-ellenor'),
+    offLabel: 'Sandbox' | t('craft-utanvet-ellenor')
+}) }}
+
+{{ forms.autosuggestField({
+    label: 'Public API Key' | t('craft-utanvet-ellenor'),
+    instructions: 'Enter Utánvét Ellenőr public API key here.' | t('craft-utanvet-ellenor'),
+    id: 'publicApiKey',
+    name: 'publicApiKey',
+    required: true,
+    suggestEnvVars: true,
+    value: settings['publicApiKey'] ?? null
+}) }}
+
+{{ forms.autosuggestField({
+    label: 'Private API Key' | t('craft-utanvet-ellenor'),
+    instructions: 'Enter Utánvét Ellenőr private API key here.' | t('craft-utanvet-ellenor'),
+    id: 'privateApiKey',
+    name: 'privateApiKey',
+    required: true,
+    suggestEnvVars: true,
+    value: settings['privateApiKey'] ?? null
+}) }}
+
+{{ forms.textField({
+    label: 'Reputation Threshold' | t('craft-utanvet-ellenor'),
+    instructions: 'Calculated with the following formula: `(good-bad) / all`, so a `0.5` reputation can mean 6 successful and 2 rejected deliveries. ' | t('craft-utanvet-ellenor'),
+    id: 'threshold',
+    name: 'threshold',
+    type: 'number',
+    min: -1,
+    max: 1,
+    step: 0.1,
+    required: true,
+    value: settings['threshold'] ?? null
+}) }}
+
+{% set allOrderStatuses = craft.commerce.orderStatuses.allOrderStatuses | reverse %}
+{% set orderStatuses = {} %}
+{% for key, value in allOrderStatuses %}
+    {% set item = {
+        (loop.index): {
+            label: value.name,
+            value: value.id
+        }
+    } %}
+
+    {% set orderStatuses = item | merge(orderStatuses) %}
+{% endfor %}
+
+{{ forms.selectField({
+    label: 'Successful Delivery Status' | t('craft-utanvet-ellenor'),
+    instructions: 'Select which order status indicates a successful delivery.' | t('craft-utanvet-ellenor'),
+    id: 'successfulDeliveryOrderState',
+    name: 'successfulDeliveryOrderState',
+    required: true,
+    value: settings['successfulDeliveryOrderState'] ?? null,
+    options: orderStatuses
+}) }}
+
+{{ forms.selectField({
+    label: 'Refused Delivery Status' | t('craft-utanvet-ellenor'),
+    instructions: 'Select which order status indicates a refused delivery.' | t('craft-utanvet-ellenor'),
+    id: 'refusedDeliveryOrderState',
+    name: 'refusedDeliveryOrderState',
+    required: true,
+    value: settings['refusedDeliveryOrderState'] ?? null,
+    options: orderStatuses
+}) }}
+
+{% set allPaymentMethods = craft.commerce.gateways.getAllGateways() | reverse %}
+{% set paymentMethods = {} %}
+{% for key, value in allPaymentMethods %}
+    {% set item = {
+        (loop.index): {
+            label: value.name,
+            value: value.id
+        }
+    } %}
+
+    {% set paymentMethods = item | merge(paymentMethods) %}
+{% endfor %}
+
+{{ forms.checkboxGroupField({
+    label: "Payment Methods to Hide" | t("craft-utanvet-ellenor"),
+    instructions: "Hide these payment methods if the reputation is below the Reputation Threshold." | t("craft-utanvet-ellenor"),
+    id: 'paymentMethodsToHide',
+    name: 'paymentMethodsToHide',
+    required: false,
+    values: settings['paymentMethodsToHide'],
+    options: paymentMethods
+}) }}

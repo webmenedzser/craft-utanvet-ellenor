@@ -1,0 +1,43 @@
+{
+    "name": "webmenedzser/craft-utanvet-ellenor",
+    "description": "Utánvét Ellenőr integration for Craft CMS",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft utanvet ellenor"
+    ],
+    "support": {
+        "docs": "https://github.com/webmenedzser/craft-utanvet-ellenor/craft-utanvet-ellenor/blob/master/README.md",
+        "issues": "https://github.com/webmenedzser/craft-utanvet-ellenor/craft-utanvet-ellenor/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dr. Ottó Radics",
+            "homepage": "https://www.webmenedzser.hu"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0",
+        "webmenedzser/uvb-connector": "^1.3.0",
+        "craftcms/commerce": "^3.2.13.2"
+    },
+    "autoload": {
+        "psr-4": {
+          "webmenedzser\\craftutanvetellenor\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Utánvét Ellenőr",
+        "handle": "craft-utanvet-ellenor",
+        "developer": "dr. Ottó Radics",
+        "developerUrl": "https://www.webmenedzser.hu",
+        "documentationUrl": "https://github.com/webmenedzser/craft-utanvet-ellenor/craft-utanvet-ellenor/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/webmenedzser/craft-utanvet-ellenor/craft-utanvet-ellenor/master/CHANGELOG.md",
+        "class": "webmenedzser\\craftutanvetellenor\\CraftUtanvetEllenor"
+    }
+}
