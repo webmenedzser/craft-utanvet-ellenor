@@ -29,6 +29,8 @@ To install the plugin, follow these instructions.
     2. Set your preferred threshold.
     3. Select which order statuses should trigger the feedback to our service.
     4. Select which payment methods should be hidden if the user's reputation is below the set threshold.
+    
+6. Replace `craft.commerce.gateways.allCustomerEnabledGateways` with `craft.utanvetellenor.allCustomerEnabledGateways` in your templates. You can also get the available gateways by sending an AJAX POST request (along with `CRAFT_CSRF_TOKEN`) to `index.php?action=craft-utanvet-ellenor/payment-methods`.
 
 ## Utánvét Ellenőr Overview
 

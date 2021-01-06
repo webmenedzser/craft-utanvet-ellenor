@@ -13,8 +13,11 @@ namespace webmenedzser\craftutanvetellenor\controllers;
 use webmenedzser\craftutanvetellenor\services\PaymentMethods;
 
 use Craft;
+use craft\errors\ElementNotFoundException;
 use craft\web\Controller;
 
+use Throwable;
+use yii\base\Exception;
 use yii\web\Response;
 
 /**
@@ -40,9 +43,14 @@ class PaymentMethodsController extends Controller
 
     /**
      * @return Response
+     * @throws Throwable
+     * @throws ElementNotFoundException
+     * @throws Exception
      */
     public function actionIndex() : Response
     {
+        $this->requirePostRequest();
+
         return $this->asJson(PaymentMethods::getAllCustomerEnabledGateways());
     }
 }
